@@ -1,19 +1,17 @@
-﻿
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import datetime
 from PIL import Image
-import win32com.client as win32
-import os
+#import win32com.client as win32
+#import os
 
 import streamlit.components.v1 as components
 from dateutil import relativedelta
 st.set_page_config(layout="wide")
 
-data=pd.read_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
-portal=pd.read_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\Portal_Data_0306.xlsx', sheet_name='1 Table')
+data=pd.read_excel('CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
+portal=pd.read_excel('Portal_Data_0306.xlsx', sheet_name='1 Table')
 #st.dataframe(data)
 #st.dataframe(portal)
 #st.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:40px;border-radius:0%;">CPI</p>', unsafe_allow_html=True)
@@ -449,7 +447,7 @@ if submit:
         portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Education')]=float(edu_cpi)
         portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Restaurants and accommodation services')]=float(rest_cpi)
         portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Miscellaneous goods and services')]=float(mis_cpi)
-    portal.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\Portal_Data_0306.xlsx', sheet_name='1 Table')
+    portal.to_excel('Portal_Data_0306.xlsx', sheet_name='1 Table')
     try:
         data['Year'][(data['Country']==country)]=float(base_year_new_str)
         data['Food and non-alcoholic beverages'][(data['Country']==country)]=float(new_food_weight)
@@ -464,49 +462,49 @@ if submit:
         data['Education'][(data['Country']==country)]=float(new_edu_weight)
         data['Restaurants and accommodation services'][(data['Country']==country)]=float(new_rest_weight)
         data['Miscellaneous goods and services'][(data['Country']==country)]=float(new_mis_weight)
-        data.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
+        data.to_excel('CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
     except:
         pass
 
 
 
 
-    data_sent = {'Country':country,
-        missing_date_data: [food_cpi,alcohol_cpi, cloth_cpi,house_cpi,furnish_cpi,health_cpi,trans_cpi,comm_cpi,leis_cpi,edu_cpi,rest_cpi,mis_cpi,gen_cpi], 
-            'CPI groups': ['Food and non-alcoholic beverages','Alcoholic beverages, tobacco and narcotics','Clothing and footwear','Housing, water, electricity, gas and other fuels',
-                           'Furnishings, household equipment and routine household maintenance','Health','Transport','Information and Communication','Recreation, sport and culture',
-                           'Education','Restaurants and accommodation services','Miscellaneous goods and services','General CPI']}  
+#     data_sent = {'Country':country,
+#         missing_date_data: [food_cpi,alcohol_cpi, cloth_cpi,house_cpi,furnish_cpi,health_cpi,trans_cpi,comm_cpi,leis_cpi,edu_cpi,rest_cpi,mis_cpi,gen_cpi], 
+#             'CPI groups': ['Food and non-alcoholic beverages','Alcoholic beverages, tobacco and narcotics','Clothing and footwear','Housing, water, electricity, gas and other fuels',
+#                            'Furnishings, household equipment and routine household maintenance','Health','Transport','Information and Communication','Recreation, sport and culture',
+#                            'Education','Restaurants and accommodation services','Miscellaneous goods and services','General CPI']}  
   
 
-    df = pd.DataFrame(data_sent)
-    if "model_button" not in st.session_state:
-        st.session_state.model_button=False
+#     df = pd.DataFrame(data_sent)
+#     if "model_button" not in st.session_state:
+#         st.session_state.model_button=False
 
-    if model_button or st.session_state.model_button:
-        st.session_state.model_button=True
-        df['New Base Year']=base_year_new
+#     if model_button or st.session_state.model_button:
+#         st.session_state.model_button=True
+#         df['New Base Year']=base_year_new
         
-        df['New Weight']=[new_food_weight,new_alcohol_weight,new_cloth_weight,new_house_weight,new_furnish_weight,new_health_weight,new_trans_weight,new_comm_weight,new_leis_weight,
-                          new_edu_weight,new_rest_weight,new_mis_weight,'100']
-    st.session_state.model_button=False
-    df.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI_online.xlsx', sheet_name='Sheet1')
-    st.dataframe(df)
-    st.dataframe(portal)
+#         df['New Weight']=[new_food_weight,new_alcohol_weight,new_cloth_weight,new_house_weight,new_furnish_weight,new_health_weight,new_trans_weight,new_comm_weight,new_leis_weight,
+#                           new_edu_weight,new_rest_weight,new_mis_weight,'100']
+#     st.session_state.model_button=False
+#     df.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI_online.xlsx', sheet_name='Sheet1')
+#     st.dataframe(df)
+#     st.dataframe(portal)
 
-    import pythoncom
-    pythoncom.CoInitialize()
-    outlook = win32.Dispatch('outlook.application')
-    mail = outlook.CreateItem(0)
-    mail.To = 'ghina.koteich@un.org'
-    mail.Subject = 'New Online CPI data'
-    mail.Body = 'Kindly, find attached the recently submitted CPI Data.'
+#     import pythoncom
+#     pythoncom.CoInitialize()
+#     outlook = win32.Dispatch('outlook.application')
+#     mail = outlook.CreateItem(0)
+#     mail.To = 'ghina.koteich@un.org'
+#     mail.Subject = 'New Online CPI data'
+#     mail.Body = 'Kindly, find attached the recently submitted CPI Data.'
 
 
     
-    attachment  = os.path.join(os.getcwd(),'C:/Users/10197378/Desktop/CPI/Dashboard/CPI_online.xlsx')
-    mail.Attachments.Add(attachment)
+#     attachment  = os.path.join(os.getcwd(),'C:/Users/10197378/Desktop/CPI/Dashboard/CPI_online.xlsx')
+#     mail.Attachments.Add(attachment)
 
-    mail.Send()
+#     mail.Send()
     #import smtplib
     #from email.mime.multipart import MIMEMultipart
     #from email.mime.text import MIMEText
