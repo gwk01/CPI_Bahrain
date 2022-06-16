@@ -3,3 +3,4 @@ numpy
 datetime
 python-dateutil
 pillow
+openpyxl
