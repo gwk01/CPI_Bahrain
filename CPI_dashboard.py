@@ -21,7 +21,7 @@ for i in range(len(portal)):
     portal['Country'][i]=portal['Country'][i].rstrip()
 #Data date
 mydate = datetime.datetime.now()
-cpi_photo=Image.open('C:/Users/10197378/Desktop/CPI/Dashboard/Capture.png')
+cpi_photo=Image.open('Capture.png')
 #Country
 
 country = 'Bahrain'
