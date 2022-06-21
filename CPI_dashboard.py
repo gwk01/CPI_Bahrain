@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import datetime
 from PIL import Image
-import win32com.client as win32
-import os
+#import win32com.client as win32
+#import os
 
 import streamlit.components.v1 as components
 from dateutil import relativedelta
