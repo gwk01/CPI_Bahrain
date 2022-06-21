@@ -23,7 +23,7 @@ for i in range(len(portal)):
     portal['Country'][i]=portal['Country'][i].rstrip()
 #Data date
 mydate = datetime.datetime.now()
-cpi_photo=Image.open('Capture.png')
+cpi_photo=Image.open('Capture.PNG')
 #Country
 
 country = 'Bahrain'
@@ -428,7 +428,7 @@ def local_css(file_name):
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
-local_css("C:/Users/10197378/OneDrive/Capstone/streamlit/Buttons/style/style.css")
+local_css("style/style.css")
 
 #submit=col3.button("Submit and Send")
 #st.write(type(gen_cpi))
@@ -469,7 +469,7 @@ try:
             portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Education')]=float(edu_cpi)
             portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Restaurants and accommodation services')]=float(rest_cpi)
             portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Miscellaneous goods and services')]=float(mis_cpi)
-        portal.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\Portal_Data_0306.xlsx', sheet_name='1 Table')
+        portal.to_excel('Portal_Data_0306.xlsx', sheet_name='1 Table')
         try:
             data['Year'][(data['Country']==country)]=float(base_year_new_str)
             data['Food and non-alcoholic beverages'][(data['Country']==country)]=float(new_food_weight)
@@ -484,7 +484,7 @@ try:
             data['Education'][(data['Country']==country)]=float(new_edu_weight)
             data['Restaurants and accommodation services'][(data['Country']==country)]=float(new_rest_weight)
             data['Miscellaneous goods and services'][(data['Country']==country)]=float(new_mis_weight)
-            data.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
+            data.to_excel('CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
         except:
             pass
 
@@ -510,7 +510,7 @@ try:
             df['New Weight']=[new_food_weight,new_alcohol_weight,new_cloth_weight,new_house_weight,new_furnish_weight,new_health_weight,new_trans_weight,new_comm_weight,new_leis_weight,
                               new_edu_weight,new_rest_weight,new_mis_weight,'100']
         st.session_state.model_button=False
-        df.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI_online.xlsx', sheet_name='Sheet1')
+        df.to_excel('CPI_online.xlsx', sheet_name='Sheet1')
 except:
     pass
    
