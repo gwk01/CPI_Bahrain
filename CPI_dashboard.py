@@ -1,10 +1,12 @@
+
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 import datetime
 from PIL import Image
-#import win32com.client as win32
-#import os
+import win32com.client as win32
+import os
 
 import streamlit.components.v1 as components
 from dateutil import relativedelta
@@ -21,7 +23,7 @@ for i in range(len(portal)):
     portal['Country'][i]=portal['Country'][i].rstrip()
 #Data date
 mydate = datetime.datetime.now()
-cpi_photo=Image.open('Capture.PNG')
+cpi_photo=Image.open('Capture.png')
 #Country
 
 country = 'Bahrain'
@@ -64,7 +66,7 @@ with col3:
                 latest_date_data=year+'-'+latest_month_nb
                 missing_date_data=missing_month
                 displayed=month+" "+ missing_year
-                st.markdown(f'<p style="text-align:left;font-style: italic;color:#0d0d0c;font-family:Arial;font-size:15px;border-radius:0%;">Needed Data: '+ str(month) + ' '+str(missing_year)+'</p>', unsafe_allow_html=True)
+                st.markdown(f'<p style="text-align:left;font-style: italic;color:#0d0d0c;font-family:Arial;font-size:15px;border-radius:0%;">Needed Data Month: '+ str(month) + ' '+str(missing_year)+'</p>', unsafe_allow_html=True)
     else: #convert to number
         #month, year, space1, space2, space3=st.columns(5)
         month=st.selectbox("Month", ("January", "February", "March", "April", "May", "June", "July", "August", "October", "November", "December"))
@@ -88,7 +90,7 @@ with col3:
         div.stButton > button:first-child {
             background-color: #fc9a6d;
             font-family:Arial;
-            text-align:left;
+            text-align:center;
             color: black;
             height: 2em;
             width: 15em;
@@ -175,7 +177,7 @@ with col4:
     gen_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
     gen_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(gen_cpi_last)+'</span>', unsafe_allow_html=True)
     #needed data
-    gen_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+    gen_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
     gen_cpi = gen_exp.text_input(displayed+'             ')
 
 col1,col2,col3,col4=st.columns(4)
@@ -195,7 +197,7 @@ else:
 food_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 food_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(food_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-food_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+food_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 food_cpi = food_exp.text_input(displayed)
 
 #Alcoholic Beverages, Tobacco and Narcotics
@@ -214,7 +216,7 @@ else:
 alcohol_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 alcohol_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(alcohol_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-alcohol_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+alcohol_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 alcohol_cpi = alcohol_exp.text_input(displayed+' ')
 
 #Clothing and Footwear
@@ -233,7 +235,7 @@ else:
 cloth_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 cloth_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(cloth_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-cloth_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+cloth_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 cloth_cpi = cloth_exp.text_input(displayed+'  ')
 
 #Housing, Water, Electricity, Gas and Other Fuels
@@ -252,7 +254,7 @@ else:
 house_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 house_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(house_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-house_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+house_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 house_cpi = house_exp.text_input(displayed+'    ')
 
 #Furnishings, Household Equipment and Routine Household Maintenance
@@ -271,7 +273,7 @@ else:
 furnish_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 furnish_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(furnish_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-furnish_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+furnish_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 furnish_cpi = furnish_exp.text_input(displayed+'     ')
 
 
@@ -291,7 +293,7 @@ else:
 health_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 health_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(health_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-health_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+health_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 health_cpi = health_exp.text_input(displayed+'      ')
 
 #Transport
@@ -310,7 +312,7 @@ else:
 trans_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 trans_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(trans_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-trans_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+trans_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 trans_cpi = trans_exp.text_input(displayed+'       ')
 
 #Information and Communication
@@ -329,7 +331,7 @@ else:
 comm_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 comm_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(comm_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-comm_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+comm_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 comm_cpi = comm_exp.text_input(displayed+'        ')
 
 #Recreation, sport and culture
@@ -348,7 +350,7 @@ else:
 leis_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 leis_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(leis_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-leis_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+leis_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 leis_cpi = leis_exp.text_input(displayed+'         ')
 
 #Education
@@ -367,7 +369,7 @@ else:
 edu_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 edu_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(edu_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-edu_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+edu_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 edu_cpi = edu_exp.text_input(displayed+'          ')
 
 #Restaurants and accommodation services
@@ -386,7 +388,7 @@ else:
 rest_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 rest_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(rest_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-rest_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+rest_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 rest_cpi = rest_exp.text_input(displayed+'           ')
 
 #Miscellaneous goods and services
@@ -405,139 +407,110 @@ else:
 mis_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Last Available Data</p>', unsafe_allow_html=True)
 mis_exp.markdown(f'<span style="font-family:Arial;font-size:13px;">'+ str(latest_alpha)+'<br></span> <span style="margin:auto; display:table;font-family:Arial;font-size:20px;">'+ str(mis_cpi_last)+ '</span>', unsafe_allow_html=True)
 #needed data
-mis_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Data</p>', unsafe_allow_html=True)
+mis_exp.markdown(f'<p style="text-align:center; background-color:#f5f5ed;color:#0d0d0c;font-family:Arial Black;font-size:15px;border-radius:0%;">Needed Index</p>', unsafe_allow_html=True)
 mis_cpi = mis_exp.text_input(displayed+'            ')
 
-col1, col2,col3=st.columns(3)
-submit=col2.button("Submit")
+st.markdown('<p></p>', unsafe_allow_html=True)
+
+col1, col2,col3, col4,col5=st.columns(5)
+contact_form = """
+<form action="https://formsubmit.co/cpi_online@outlook.com" method="POST">
+     <input type="hidden" name="_captcha" value="false">
+     <button type="submit">Submit & Send</button>
+</form>
+"""
+
+submit=col3.markdown(contact_form, unsafe_allow_html=True)
+
+# Use Local CSS File
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+local_css("C:/Users/10197378/OneDrive/Capstone/streamlit/Buttons/style/style.css")
+
+#submit=col3.button("Submit and Send")
 #st.write(type(gen_cpi))
 #gen_cpi=float(gen_cpi)
 #st.write(type(gen_cpi))
 #st.write(missing_date_data)
 #st.write(type(missing_date_data))
+try:
+    if submit:
+     
+        #st.markdown('<h3 style="text-align:center;color:#0d0d0c;font-family:Arial Black;font-size:35px;border-radius:0%;">Thank you! Your CPI data was sent.</h3>', unsafe_allow_html=True)
+        try:
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='General CPI')]=float(gen_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Food and non-alcoholic beverages')]=float(food_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Alcoholic beverages, tobacco and narcotics')]=float(alcohol_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Clothing and footwear')]=float(cloth_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Housing, water, electricity, gas and other fuels')]=float(house_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Furnishings, household equipment and routine household maintenance')]=float(furnish_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Health')]=float(health_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Transport')]=float(trans_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Information and Communication')]=float(comm_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Recreation, sport and culture')]=float(leis_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Education')]=float(edu_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Restaurants and accommodation services')]=float(rest_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Miscellaneous goods and services')]=float(mis_cpi)
+        except:
+            portal[missing_date_data] = np.nan
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='General CPI')]=float(gen_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Food and non-alcoholic beverages')]=float(food_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Alcoholic beverages, tobacco and narcotics')]=float(alcohol_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Clothing and footwear')]=float(cloth_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Housing, water, electricity, gas and other fuels')]=float(house_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Furnishings, household equipment and routine household maintenance')]=float(furnish_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Health')]=float(health_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Transport')]=float(trans_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Information and Communication')]=float(comm_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Recreation, sport and culture')]=float(leis_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Education')]=float(edu_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Restaurants and accommodation services')]=float(rest_cpi)
+            portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Miscellaneous goods and services')]=float(mis_cpi)
+        portal.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\Portal_Data_0306.xlsx', sheet_name='1 Table')
+        try:
+            data['Year'][(data['Country']==country)]=float(base_year_new_str)
+            data['Food and non-alcoholic beverages'][(data['Country']==country)]=float(new_food_weight)
+            data['Alcoholic beverages, tobacco and narcotics'][(data['Country']==country)]=float(new_alcohol_weight)
+            data['Clothing and footwear'][(data['Country']==country)]=float(new_cloth_weight)
+            data['Housing, water, electricity, gas and other fuels'][(data['Country']==country)]=float(new_house_weight)
+            data['Furnishings, household equipment and routine household maintenance'][(data['Country']==country)]=float(new_furnish_weight)
+            data['Health'][(data['Country']==country)]=float(new_health_weight)
+            data['Transport'][(data['Country']==country)]=float(new_trans_weight)
+            data['Information and Communication'][(data['Country']==country)]=float(new_comm_weight)
+            data['Recreation, sport and culture'][(data['Country']==country)]=float(new_leis_weight)
+            data['Education'][(data['Country']==country)]=float(new_edu_weight)
+            data['Restaurants and accommodation services'][(data['Country']==country)]=float(new_rest_weight)
+            data['Miscellaneous goods and services'][(data['Country']==country)]=float(new_mis_weight)
+            data.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
+        except:
+            pass
 
-if submit:
-    st.markdown('<h3 style="text-align:center;color:#0d0d0c;font-family:Arial Black;font-size:35px;border-radius:0%;">Thank you! Your CPI data was sent.</h3>', unsafe_allow_html=True)
-    try:
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='General CPI')]=float(gen_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Food and non-alcoholic beverages')]=float(food_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Alcoholic beverages, tobacco and narcotics')]=float(alcohol_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Clothing and footwear')]=float(cloth_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Housing, water, electricity, gas and other fuels')]=float(house_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Furnishings, household equipment and routine household maintenance')]=float(furnish_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Health')]=float(health_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Transport')]=float(trans_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Information and Communication')]=float(comm_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Recreation, sport and culture')]=float(leis_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Education')]=float(edu_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Restaurants and accommodation services')]=float(rest_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Miscellaneous goods and services')]=float(mis_cpi)
-    except:
-        portal[missing_date_data] = np.nan
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='General CPI')]=float(gen_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Food and non-alcoholic beverages')]=float(food_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Alcoholic beverages, tobacco and narcotics')]=float(alcohol_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Clothing and footwear')]=float(cloth_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Housing, water, electricity, gas and other fuels')]=float(house_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Furnishings, household equipment and routine household maintenance')]=float(furnish_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Health')]=float(health_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Transport')]=float(trans_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Information and Communication')]=float(comm_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Recreation, sport and culture')]=float(leis_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Education')]=float(edu_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Restaurants and accommodation services')]=float(rest_cpi)
-        portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Miscellaneous goods and services')]=float(mis_cpi)
-    portal.to_excel('Portal_Data_0306.xlsx', sheet_name='1 Table')
-    try:
-        data['Year'][(data['Country']==country)]=float(base_year_new_str)
-        data['Food and non-alcoholic beverages'][(data['Country']==country)]=float(new_food_weight)
-        data['Alcoholic beverages, tobacco and narcotics'][(data['Country']==country)]=float(new_alcohol_weight)
-        data['Clothing and footwear'][(data['Country']==country)]=float(new_cloth_weight)
-        data['Housing, water, electricity, gas and other fuels'][(data['Country']==country)]=float(new_house_weight)
-        data['Furnishings, household equipment and routine household maintenance'][(data['Country']==country)]=float(new_furnish_weight)
-        data['Health'][(data['Country']==country)]=float(new_health_weight)
-        data['Transport'][(data['Country']==country)]=float(new_trans_weight)
-        data['Information and Communication'][(data['Country']==country)]=float(new_comm_weight)
-        data['Recreation, sport and culture'][(data['Country']==country)]=float(new_leis_weight)
-        data['Education'][(data['Country']==country)]=float(new_edu_weight)
-        data['Restaurants and accommodation services'][(data['Country']==country)]=float(new_rest_weight)
-        data['Miscellaneous goods and services'][(data['Country']==country)]=float(new_mis_weight)
-        data.to_excel('CPI raw rebased series 2021.xlsx', sheet_name='Sheet1')
-    except:
-        pass
 
 
 
 
-#     data_sent = {'Country':country,
-#         missing_date_data: [food_cpi,alcohol_cpi, cloth_cpi,house_cpi,furnish_cpi,health_cpi,trans_cpi,comm_cpi,leis_cpi,edu_cpi,rest_cpi,mis_cpi,gen_cpi], 
-#             'CPI groups': ['Food and non-alcoholic beverages','Alcoholic beverages, tobacco and narcotics','Clothing and footwear','Housing, water, electricity, gas and other fuels',
-#                            'Furnishings, household equipment and routine household maintenance','Health','Transport','Information and Communication','Recreation, sport and culture',
-#                            'Education','Restaurants and accommodation services','Miscellaneous goods and services','General CPI']}  
+        data_sent = {'Country':country,
+            missing_date_data: [food_cpi,alcohol_cpi, cloth_cpi,house_cpi,furnish_cpi,health_cpi,trans_cpi,comm_cpi,leis_cpi,edu_cpi,rest_cpi,mis_cpi,gen_cpi], 
+                'CPI groups': ['Food and non-alcoholic beverages','Alcoholic beverages, tobacco and narcotics','Clothing and footwear','Housing, water, electricity, gas and other fuels',
+                               'Furnishings, household equipment and routine household maintenance','Health','Transport','Information and Communication','Recreation, sport and culture',
+                               'Education','Restaurants and accommodation services','Miscellaneous goods and services','General CPI']}  
   
 
-#     df = pd.DataFrame(data_sent)
-#     if "model_button" not in st.session_state:
-#         st.session_state.model_button=False
+        df = pd.DataFrame(data_sent)
+        if "model_button" not in st.session_state:
+            st.session_state.model_button=False
 
-#     if model_button or st.session_state.model_button:
-#         st.session_state.model_button=True
-#         df['New Base Year']=base_year_new
+        if model_button or st.session_state.model_button:
+            st.session_state.model_button=True
+            df['New Base Year']=base_year_new
         
-#         df['New Weight']=[new_food_weight,new_alcohol_weight,new_cloth_weight,new_house_weight,new_furnish_weight,new_health_weight,new_trans_weight,new_comm_weight,new_leis_weight,
-#                           new_edu_weight,new_rest_weight,new_mis_weight,'100']
-#     st.session_state.model_button=False
-#     df.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI_online.xlsx', sheet_name='Sheet1')
-#     st.dataframe(df)
-#     st.dataframe(portal)
-
-#     import pythoncom
-#     pythoncom.CoInitialize()
-#     outlook = win32.Dispatch('outlook.application')
-#     mail = outlook.CreateItem(0)
-#     mail.To = 'ghina.koteich@un.org'
-#     mail.Subject = 'New Online CPI data'
-#     mail.Body = 'Kindly, find attached the recently submitted CPI Data.'
-
-
-    
-#     attachment  = os.path.join(os.getcwd(),'C:/Users/10197378/Desktop/CPI/Dashboard/CPI_online.xlsx')
-#     mail.Attachments.Add(attachment)
-
-#     mail.Send()
-    #import smtplib
-    #from email.mime.multipart import MIMEMultipart
-    #from email.mime.text import MIMEText
-    #from email.mime.base import MIMEBase
-    #from email import encoders
-
-    #fromaddr = 'koteichghina@gmail.com'
-    #toaddr = ['ghina.koteich@un.org']
-
-    #msg = MIMEMultipart()
-
-    #msg['From'] = fromaddr
-    #msg['To'] = ", ".join(toaddr)
-    #msg['Subject'] = "NEW CPI Data"
-
-    #body = "Kindly, find attached the recently submitted CPI Data."
-
-    #msg.attach(MIMEText(body, 'plain'))
-
-    #filename = "CPI_online.xlsx"
-    #attachment = open("CPI_online.xlsx", 
-    #"rb")
-
-    #part = MIMEBase('application', 'octet-stream')
-    #part.set_payload((attachment).read())
-    #encoders.encode_base64(part)
-    #part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-
-    #msg.attach(part)
-
-    #server = smtplib.SMTP('smtp.gmail.com', 587)
-    #server.starttls()
-    #server.login(fromaddr, 'GwK123456') #Type Password
-    #text = msg.as_string()
-    #server.sendmail(fromaddr, toaddr, text)
-    #server.quit()
+            df['New Weight']=[new_food_weight,new_alcohol_weight,new_cloth_weight,new_house_weight,new_furnish_weight,new_health_weight,new_trans_weight,new_comm_weight,new_leis_weight,
+                              new_edu_weight,new_rest_weight,new_mis_weight,'100']
+        st.session_state.model_button=False
+        df.to_excel(r'C:\Users\10197378\Desktop\CPI\Dashboard\CPI_online.xlsx', sheet_name='Sheet1')
+except:
+    pass
+   
