@@ -4,5 +4,4 @@ datetime
 python-dateutil
 pillow
 openpyxl
-smtplib
-email
+
