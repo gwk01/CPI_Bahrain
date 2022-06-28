@@ -416,34 +416,34 @@ mis_cpi = mis_exp.text_input(displayed+'            ')
 
 st.markdown('<p></p>', unsafe_allow_html=True)
 
-col1, col2,col3, col4,col5=st.columns(5)
-contact_form = """
-<form action="https://formsubmit.co/cpi_online@outlook.com" method="POST">
-     <input type="hidden" name="_captcha" value="false">
-     <button type="submit">Submit & Send</button>
-</form>
-"""
+col1, col2,col3, col4,col5,col6,col7=st.columns(7)
+#contact_form = """
+#<form action="https://formsubmit.co/cpi_online@outlook.com" method="POST">
+#     <input type="hidden" name="_captcha" value="false">
+#     <button type="submit">Submit & Send</button>
+#</form>
+#"""
 
-submit=col3.markdown(contact_form, unsafe_allow_html=True)
+#submit=col3.markdown(contact_form, unsafe_allow_html=True)
 
-# Use Local CSS File
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+## Use Local CSS File
+#def local_css(file_name):
+#    with open(file_name) as f:
+#        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
-local_css("style/style.css")
+#local_css("C:/Users/10197378/OneDrive/Capstone/streamlit/Buttons/style/style.css")
 
-#submit=col3.button("Submit and Send")
+submit=col4.button("Submit and Send")
 #st.write(type(gen_cpi))
 #gen_cpi=float(gen_cpi)
 #st.write(type(gen_cpi))
 #st.write(missing_date_data)
 #st.write(type(missing_date_data))
-try:
-    if submit:
+
+if submit:
      
-        #st.markdown('<h3 style="text-align:center;color:#0d0d0c;font-family:Arial Black;font-size:35px;border-radius:0%;">Thank you! Your CPI data was sent.</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 style="text-align:center;color:#0d0d0c;font-family:Arial Black;font-size:35px;border-radius:0%;">Thank you! Your CPI data was sent.</h3>', unsafe_allow_html=True)
         try:
             portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='General CPI')]=float(gen_cpi)
             portal[missing_date_data][(portal['Country']==country)&(portal['CPI groups']=='Food and non-alcoholic beverages')]=float(food_cpi)
@@ -543,6 +543,3 @@ try:
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
-except:
-    pass
-   
