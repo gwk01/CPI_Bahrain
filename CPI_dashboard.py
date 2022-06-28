@@ -516,35 +516,33 @@ try:
         st.session_state.model_button=False
         df.to_excel('CPI_online.xlsx', sheet_name='Sheet1')
 	#send email
-		fromaddr = 'koteichghina@gmail.com'
-		toaddr = ['ghina.koteich@un.org']
+        fromaddr = 'koteichghina@gmail.com'
+        toaddr = ['ghina.koteich@un.org']
 
-		msg = MIMEMultipart()
+        msg = MIMEMultipart()
 
-		msg['From'] = fromaddr
-		msg['To'] = ", ".join(toaddr)
-		msg['Subject'] = "NEW Bahrain CPI Data"
+        msg['From'] = fromaddr
+        msg['To'] = ", ".join(toaddr)
+        msg['Subject'] = "NEW Bahrain CPI Data"
 
-		body = "Kindly, find attached the recently submitted CPI Data by Bahrain NSO."
+        body = "Kindly, find attached the recently submitted CPI Data by Bahrain NSO."
 
-		msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, 'plain'))
+        filename = "CPI_online.xlsx"
+        attachment = open("CPI_online.xlsx","rb")
 
-		filename = "CPI_online.xlsx"
-		attachment = open("CPI_online.xlsx","rb")
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload((attachment).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
 
-		part = MIMEBase('application', 'octet-stream')
-		part.set_payload((attachment).read())
-		encoders.encode_base64(part)
-		part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-
-		msg.attach(part)
-
-		server = smtplib.SMTP('smtp.gmail.com', 587)
-		server.starttls()
-		server.login(fromaddr, 'vuzlwmedxabnnzyz') #Type Password
-		text = msg.as_string()
-		server.sendmail(fromaddr, toaddr, text)
-		server.quit()
+        msg.attach(part)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, 'vuzlwmedxabnnzyz') #Type Password
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
 except:
     pass
    
